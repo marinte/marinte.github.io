@@ -231,11 +231,11 @@
                 
                 <div class="columns portfolio-item">
                   <div class="item-wrap">
-                     <a href="#avalo_legends3" title="Avalo Legends" class="smooth-goto">
-                        <img alt="" src="resources/images/portfolio/avalo_legends.jpg">
+                     <a href="#open_source_library" title="Avalo Legends" class="smooth-goto">
+                        <img alt="" src="resources/images/portfolio/github_logo.png">
                         <div class="overlay">
                            <div class="portfolio-item-meta">
-                              <h5>GPU-Accelerated Animation Library</h5>
+                              <h5>Animation Library</h5>
           					   </div>
                         </div>
                         <div class="link-icon"><i class="fa fa-eye"></i></div>
@@ -347,18 +347,21 @@
    
                      <h3>Game Engine</h3>
                      <p class="info">OpenGL and C++ Game Engine<span>&bull;</span> <em class="date"> 10 / 2018 - 7 / 2019</em></p>
-   
+                     Faith3D has been developed as a final HND year at ESAT for the graphics programming module. This project is also my first approach to 3D engines,
+                     these are its main features:
                      <p>
-                     Avalo Legends is a first-person melee multiplayer game made in Unreal Engine 4 and published in <a href="https://store.steampowered.com/app/1121570/Avalo_Legends/" target="_blank">Steam</a>.
-                     My main contributions to this game development are:
+                     
                      </p>
                      <ul class="contribution">
-                        <li>Full implementation of the multiplayer system (split-screen system and input management).</li>
-                        <li>Design of class hierarchy and component system by character and implementation of some characters’ ability (e.g. characters' dash).
-                        </li>
-                        <li>Implementation of some post-processing visual effects (e.g. outline of character).</li>
-                        <li>Integration of FMOD plugin for the implementation of the game’s audio.</li>
-                        <li>Full game audio system implementation and integration.</li>
+                        <li>GLTF model loader.</li>
+                        <li>Component-based game objects system.</li>
+                        <li>Data oriented design pool system.</li>
+                        <li>Multiple material management (currently the engine has lit, textured-unlit and unlit materials).</li>
+                        <li>Multiple light sources with Blinn-Phong lighting (directional, point and spot light).</li>
+                        <li>Directional shadow mapping.</li>
+                        <li>Persistence with SQLite.</li>
+                        <li>Multithread.</li>
+                        <li>Multi Sampled Anti-Alising.</li>
                       </ul>
 
                   </div>
@@ -368,23 +371,27 @@
 
                <div class="row item not_first_item">
    
-                  <div class="twelve columns" id="avalo_legends3">
+                  <div class="twelve columns" id="open_source_library">
    
                      <h3>GPU-Accelerated Animation Library (WIP)</h3>
                      <p class="info">Library for playing GPU and CPU Animations<span>&bull;</span> <em class="date"> 10 / 2019 - Ongoing</em></p>
    
                      <p>
-                     Avalo Legends is a first-person melee multiplayer game made in Unreal Engine 4 and published in <a href="https://store.steampowered.com/app/1121570/Avalo_Legends/" target="_blank">Steam</a>.
-                     My main contributions to this game development are:
+                        This project is an open source animations library developed in C++ and oriented to support different rendering backends, which will be published on GitHub and
+                        it was born out of my desire to learn how to use the GPU for general purpouses.
+                        Due to the breadth of this topic, I decided to start with animations, specifically with skeletal mesh animations. Its features are the following:
                      </p>
                      <ul class="contribution">
-                        <li>Full implementation of the multiplayer system (split-screen system and input management).</li>
-                        <li>Design of class hierarchy and component system by character and implementation of some characters’ ability (e.g. characters' dash).
-                        </li>
-                        <li>Implementation of some post-processing visual effects (e.g. outline of character).</li>
-                        <li>Integration of FMOD plugin for the implementation of the game’s audio.</li>
-                        <li>Full game audio system implementation and integration.</li>
+                        <li>Load FBX animations and models.</li>
+                        <li>Play skeletal mesh animations through CPU or GPU (as user prefers).</li>
+                        <li>Keyframes editor.</li>
+                        <li>Skeleton editor.</li>
+                        <li>Performance profiler.</li>
                       </ul>
+                     <p>
+                        In the future, I would like to expand the library to not only skeletal mesh animations but to support other types of animations and keep exploring general purpouses GPU
+                        and support more models and animations format.
+                     </p>
 
                   </div>
    
