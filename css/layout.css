@@ -475,7 +475,7 @@ ul#nav li.current a { color: #F06000; }
 	-o-transition: opacity 0.3s ease-in-out;
 	transition: opacity 0.3s ease-in-out;
 
-   background: url(../images/overlay-bg.png) repeat;
+   background: url(../resources/images/overlay-bg.png) repeat;
 }
 
 .portfolio-item .item-wrap .link-icon {
