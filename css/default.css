@@ -28,7 +28,16 @@ e. Others
 
 @import url("fonts.css");
 @import url("fontello/css/fontello.css");
-@import url("font-awesome/css/font-awesome.min.css");
+
+/* Inline SVG icons (see the sprite at the top of index.html):
+   sized and colored like the text around them */
+.icon {
+   display: inline-block;
+   width: 1em;
+   height: 1em;
+   fill: currentColor;
+   vertical-align: -0.125em;
+}
 
 /* ------------------------------------------------------------------
 /* b. Reset

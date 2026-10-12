@@ -225,7 +225,7 @@ ul#nav li.current a { color: #F06000; }
    background: #fff;
    color: #2B2B2B;
 }
-#about .download .button i {
+#about .download .button .icon {
    margin-right: 15px;
    font-size: 20px;
 }
@@ -570,16 +570,6 @@ ul#nav li.current a { color: #F06000; }
    color: #fff;
 }
 #call-to-action h1 span { display: none; }
-#call-to-action .header-col h1:before {
-   font-family: 'FontAwesome';
-   content: "\f0ac";
-	padding-right: 10px;
-	font-size: 72px;
-   line-height: 72px;
-   text-align: left;
-   float: left;
-   color: #fff;
-}
 #call-to-action .action {
    margin-top: 12px;
 }
@@ -638,16 +628,6 @@ call-to-action .button {
 }
 #testimonials h1 span { display: none; }
 #testimonials .header-col { padding-top: 9px; }
-#testimonials .header-col h1:before {
-   font-family: 'FontAwesome';
-   content: "\f10d";
-	padding-right: 10px;
-	font-size: 72px;
-   line-height: 72px;
-   text-align: left;
-   float: left;
-   color: #fff;
-}
 
 /*	Blockquotes */
 #testimonials blockquote {
@@ -783,16 +763,6 @@ call-to-action .button {
    margin-bottom: 6px;
 }
 #contact h1 span { display: none; }
-#contact h1:before {
-   font-family: 'FontAwesome';
-   content: "\f0e0";
-	padding-right: 10px;
-	font-size: 72px;
-   line-height: 72px;
-   text-align: left;
-   float: left;
-   color: #ebeeee;
-}
 
 #contact h4 {
    font: 16px/24px 'opensans-bold', sans-serif;
