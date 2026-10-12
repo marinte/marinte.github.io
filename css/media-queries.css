@@ -368,9 +368,22 @@
 
    /* social links */
    footer .social-links { font-size: 20px; }
-   footer .social-links li { margin-left: 14px; }   
+   footer .social-links li { margin-left: 14px; }
 
 }
+
+/* replacements for the former jQuery plugins
+  -------------------------------------------------------------------------- */
+
+/* Full-viewport header (was set from JS) */
+header { height: 100vh; height: 100svh; }
+
+/* Replaces FitText: scales between 40px and 90px */
+header .banner-text h1.responsive-headline { font-size: clamp(40px, 10vw, 90px); }
+
+/* Replaces jQuery fadeIn/fadeOut on the nav */
+#nav-wrap { transition: opacity .2s ease; }
+#nav-wrap.nav-hidden { opacity: 0; pointer-events: none; }
 
 
 

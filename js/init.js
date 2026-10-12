@@ -4,207 +4,63 @@
 /*
 -----------------------------------------------------------------------------------*/
 
- jQuery(document).ready(function($) {
-
-/*----------------------------------------------------*/
-/* Switch Language
------------------------------------------------------- */
-
-$('[lang="es"]').hide();
-
-$('#switch-sp').click(function() {
-   $('[lang="es"]').hide();
-   $('[lang="en"]').toggle();
-});
-
-$('#switch-en').click(function() {
-   $('[lang="en"]').hide();
-   $('[lang="es"]').toggle();
-});
-/*----------------------------------------------------*/
-/* FitText Settings
------------------------------------------------------- */
-
-    setTimeout(function() {
-	   $('h1.responsive-headline').fitText(1, { minFontSize: '40px', maxFontSize: '90px' });
-	 }, 100);
-
+document.addEventListener('DOMContentLoaded', () => {
+   const header = document.querySelector('header');
+   const nav = document.getElementById('nav-wrap');
+   const navLinks = [...nav.querySelectorAll('#nav a')];
+   const sections = [...document.querySelectorAll('section')];
 
 /*----------------------------------------------------*/
 /* Smooth Scrolling
+/* .smoothscroll = nav/arrows, .smooth-goto = portfolio tiles
 ------------------------------------------------------ */
 
-   $('.smoothscroll').on('click',function (e) {
-	    e.preventDefault();
-
-	    var target = this.hash,
-	    $target = $(target);
-
-	    $('html, body').stop().animate({
-	        'scrollTop': $target.offset().top
-	    }, 800, 'swing', function () {
-	        window.location.hash = target;
-	    });
-	});
-
+   document.querySelectorAll('a.smoothscroll, a.smooth-goto').forEach(link => {
+      link.addEventListener('click', e => {
+         if (!link.hash) return;
+         const target = document.querySelector(link.hash);
+         if (!target) return;
+         e.preventDefault();
+         const offset = link.classList.contains('smooth-goto') ? 100 : 0;
+         window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - offset,
+            behavior: 'smooth'
+         });
+         if (!offset) history.pushState(null, '', link.hash);
+      });
+   });
 
 /*----------------------------------------------------*/
 /* Highlight the current section in the navigation bar
 ------------------------------------------------------*/
 
-	var sections = $("section");
-	var navigation_links = $("#nav-wrap a");
-
-	sections.waypoint({
-
-      handler: function(event, direction) {
-
-		   var active_section;
-
-			active_section = $(this);
-			if (direction === "up") active_section = active_section.prev();
-
-         var name = active_section.attr("id");
-         if(name == "resume") name = "portfolio";
-			var active_link = $('#nav-wrap a[href="#' + name + '"]');
-
-         navigation_links.parent().removeClass("current");
-			active_link.parent().addClass("current");
-
-		},
-		offset: '35%'
-
-	});
-
-
-/*----------------------------------------------------*/
-/*	Make sure that #header-background-image height is
-/* equal to the browser height.
------------------------------------------------------- */
-
-   $('header').css({ 'height': $(window).height() });
-   $(window).on('resize', function() {
-
-        $('header').css({ 'height': $(window).height() });
-        $('body').css({ 'width': $(window).width() })
-   });
-
-
-/*----------------------------------------------------*/
-/*	Fade In/Out Primary Navigation
-------------------------------------------------------*/
-
-   $(window).on('scroll', function() {
-
-		var h = $('header').height();
-		var y = $(window).scrollTop();
-      var nav = $('#nav-wrap');
-
-	   if ( (y > h*.20) && (y < h) && ($(window).outerWidth() > 768 ) ) {
-	      nav.fadeOut('fast');
-	   }
-      else {
-         if (y < h*.20) {
-            nav.removeClass('opaque').fadeIn('fast');
-         }
-         else {
-            nav.addClass('opaque').fadeIn('fast');
-         }
+   function updateCurrentLink() {
+      const line = window.innerHeight * 0.35;
+      let current = 'home';
+      for (const s of sections) {
+         if (s.getBoundingClientRect().top <= line) current = s.id;
       }
-
-	});
-
+      if (current === 'resume') current = 'portfolio';
+      navLinks.forEach(a =>
+         a.parentElement.classList.toggle('current', a.hash === '#' + current));
+   }
 
 /*----------------------------------------------------*/
-/*	Modal Popup
+/* Fade In/Out Primary Navigation
 ------------------------------------------------------*/
 
-$('.smooth-goto').on('click', function() {  
-   $('html, body').animate({scrollTop: $(this.hash).offset().top - 100}, 1000);
-   return false;
+   function updateNavVisibility() {
+      const h = header.offsetHeight;
+      const y = window.scrollY;
+      nav.classList.toggle('nav-hidden', y > h * 0.2 && y < h && window.innerWidth > 768);
+      nav.classList.toggle('opaque', y >= h * 0.2);
+   }
+
+   function onScroll() {
+      updateCurrentLink();
+      updateNavVisibility();
+   }
+   window.addEventListener('scroll', onScroll, { passive: true });
+   window.addEventListener('resize', onScroll);
+   onScroll();
 });
-//Disable popup.
-/*
-    $('.item-wrap a').magnificPopup({
-
-       type:'inline',
-       fixedContentPos: false,
-       removalDelay: 200,
-       showCloseBtn: false,
-       mainClass: 'mfp-fade'
-
-    });
-
-    $(document).on('click', '.popup-modal-dismiss', function (e) {
-    		e.preventDefault();
-    		$.magnificPopup.close();
-    });
-*/
-/*----------------------------------------------------*/
-/*	Flexslider
-/*----------------------------------------------------*/
-   $('.flexslider').flexslider({
-      namespace: "flex-",
-      controlsContainer: ".flex-container",
-      animation: 'slide',
-      controlNav: true,
-      directionNav: false,
-      smoothHeight: true,
-      slideshowSpeed: 7000,
-      animationSpeed: 600,
-      randomize: false,
-   });
-
-/*----------------------------------------------------*/
-/*	contact form
-------------------------------------------------------*/
-
-   $('form#contactForm button.submit').click(function() {
-
-      $('#image-loader').fadeIn();
-
-      var contactName = $('#contactForm #contactName').val();
-      var contactEmail = $('#contactForm #contactEmail').val();
-      var contactSubject = $('#contactForm #contactSubject').val();
-      var contactMessage = $('#contactForm #contactMessage').val();
-
-      var data = 'contactName=' + contactName + '&contactEmail=' + contactEmail +
-               '&contactSubject=' + contactSubject + '&contactMessage=' + contactMessage;
-
-      $.ajax({
-
-	      type: "POST",
-	      url: "inc/sendEmail.php",
-	      data: data,
-	      success: function(msg) {
-
-            // Message was sent
-            if (msg == 'OK') {
-               $('#image-loader').fadeOut();
-               $('#message-warning').hide();
-               $('#contactForm').fadeOut();
-               $('#message-success').fadeIn();   
-            }
-            // There was an error
-            else {
-               $('#image-loader').fadeOut();
-               $('#message-warning').html(msg);
-	            $('#message-warning').fadeIn();
-            }
-
-	      }
-
-      });
-      return false;
-   });
-
-
-});
-
-
-
-
-
-
-
-
